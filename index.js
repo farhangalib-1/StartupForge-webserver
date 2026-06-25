@@ -123,6 +123,15 @@ app.patch("/api/opportunities/:id", async (req, res) => {
 
   res.send(result);
 });
+app.delete("/api/opportunities/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const result = await opportunitiesCollections.deleteOne({
+    _id: new ObjectId(id),
+  });
+
+  res.send(result);
+});
   //await client.connect();
   //await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
