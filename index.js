@@ -40,6 +40,11 @@ async function run() {
       );
       res.json({message:"payment successful!!!"})
     })
+    app.get("/payment", async(req, res)=>{
+      const cursor = await paymentCollections.find();
+      const result = await cursor.toArray();
+      res.send(result)
+    })
     app.post("/api/startups", async(req, res)=>{
         const body = req.body
         const result = await startupCollections.insertOne(body)
@@ -51,6 +56,18 @@ async function run() {
         const result = await cursor.toArray()
         res.send(result)
     })
+    
+    
+    app.get("/api/users", async (req, res) => {
+  const cursor = userCollection.find({
+    role: { $ne: "Admin" }
+  });
+  const result = await cursor.toArray();
+  res.send(result);
+});
+
+
+
     app.post("/api/opportunities", async(req, res)=>{
       const data = req.body
       const result = await opportunitiesCollections.insertOne(data)
