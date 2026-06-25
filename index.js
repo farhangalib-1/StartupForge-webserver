@@ -40,6 +40,22 @@ async function run() {
       );
       res.json({message:"payment successful!!!"})
     })
+    app.patch("/api/startups/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const result = await startupCollections.updateOne(
+    {
+      _id: new ObjectId(id),
+    },
+    {
+      $set: {
+        status: "approved",
+      },
+    }
+  );
+
+  res.send(result);
+});
     app.get("/payment", async(req, res)=>{
       const cursor = await paymentCollections.find();
       const result = await cursor.toArray();
