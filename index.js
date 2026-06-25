@@ -36,7 +36,7 @@ async function run() {
       })
       await userCollection.updateOne(
         {_id: new ObjectId(userId)},
-        {$set: {role: "pro"}}
+        {$set: {plan: "pro"}}
       );
       res.json({message:"payment successful!!!"})
     })
