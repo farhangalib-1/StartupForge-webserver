@@ -20,6 +20,7 @@ async function run() {
     
     const db = client.db("StartupForge")
     const startupCollections = db.collection("startups")
+    const opportunitiesCollections = db.collection("opportunities")
     app.post("/api/startups", async(req, res)=>{
         const body = req.body
         const result = await startupCollections.insertOne(body)
@@ -30,6 +31,16 @@ async function run() {
         const cursor = await startupCollections.find()
         const result = await cursor.toArray()
         res.send(result)
+    })
+    app.post("/api/opportunities", async(req, res)=>{
+      const data = req.body
+      const result = await opportunitiesCollections.insertOne(data)
+      res.send(res)
+    })
+    app.get("/api/opportunities", async(req, res)=>{
+      const cursor = await opportunitiesCollections.find()
+      const result = await cursor.toArray()
+      res.send(result)
     })
   //await client.connect();
   //await client.db("admin").command({ ping: 1 });
