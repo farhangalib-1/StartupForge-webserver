@@ -24,7 +24,7 @@ async function run() {
     const opportunitiesCollections = db.collection("opportunities")
     const paymentCollections = db.collection("payments")
     app.post("/payment", async(req, res)=>{
-      const {sessionId, userId, priceId} = req.body
+      const {sessionId, userId, priceId, userName, userEmail} = req.body
       const isExist = await paymentCollections.findOne({sessionId})
       if(isExist){
         return res.json({message: "Already Exist"})
@@ -32,6 +32,8 @@ async function run() {
       const result = await paymentCollections.insertOne({
         sessionId,
         userId,
+        userName,
+        userEmail,
         priceId
       })
       await userCollection.updateOne(
