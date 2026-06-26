@@ -202,7 +202,7 @@ app.get("/api/ownstartups/:userId", async (req, res) => {
   res.send(result);
 });
 
-app.get("/api/myopportunities/:id", async (req, res) => {
+app.get("/api/myallopportunities/:id", async (req, res) => {
   const { id } = req.params;
 
   const result = await opportunitiesCollections
