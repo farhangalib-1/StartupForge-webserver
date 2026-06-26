@@ -34,7 +34,8 @@ async function run() {
         userId,
         userName,
         userEmail,
-        priceId
+        priceId,
+        createAt: new Date(),
       })
       await userCollection.updateOne(
         {_id: new ObjectId(userId)},
