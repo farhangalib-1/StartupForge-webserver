@@ -146,7 +146,6 @@ app.patch("/api/opportunities/:id", async (req, res) => {
 
   const data = req.body;
 
-  delete data.status;
 
   const result = await opportunitiesCollections.updateOne(
     {
@@ -189,6 +188,20 @@ app.patch("/api/users/:id", async (req, res) => {
 
   res.send(result);
 });
+
+
+
+
+app.get("/api/ownstartups/:userId", async (req, res) => {
+  const { userId } = req.params;
+
+  const result = await startupCollections
+    .find({ userId })
+    .toArray();
+
+  res.send(result);
+});
+
 
 
   //await client.connect();
